@@ -184,7 +184,7 @@ public class ListaApuestas {
         Apuesta apuesta = nodoApuesta.informacion;
         int[] ordenCaballos = apuesta.getOrdenCaballos();
         for (int i = 0; i < 10; i++) {
-            if (ordenCaballos[i]==resultadosCarrera[i]) {
+            if (ordenCaballos[resultadosCarrera[i]-1]==(i+1)) {
                 apuesta.setPunteoApuesta(apuesta.getPunteoApuesta()+10-i);
             }
             pasos++;
@@ -203,12 +203,13 @@ public class ListaApuestas {
     
     public void ordenarPorPunteo(){ //Dos ciclos, O(n^2)
         Instant starts = Instant.now();
-        if (size() > 1) {
-            for (int i = 0; i < size(); i++ ) {
+        int sizeLista = size();
+        if (sizeLista > 1) {
+            for (int i = 0; i < sizeLista; i++ ) {
                 Nodo nodoActual = head;
                 Nodo next = head.getSiguiente();
                 sumaPasosOrdenamientoPunteo+=2;
-                for (int j = 0; j < size() - 1; j++) {
+                for (int j = 0; j < sizeLista - 1; j++) {
                     if (nodoActual.informacion.getPunteoApuesta() > next.informacion.getPunteoApuesta()) {
                         swapNodos(nodoActual, next, false);
                         sumaPasosOrdenamientoPunteo+=4;
@@ -228,12 +229,13 @@ public class ListaApuestas {
     
     public void ordenarAlfabeticamente(){
         Instant starts = Instant.now();
-        if (size() > 1) {
-            for (int i = 0; i < size(); i++ ) {
+        int sizeLista = size();
+        if (sizeLista > 1) {
+            for (int i = 0; i < sizeLista; i++ ) {
                 Nodo nodoActual = head;
                 Nodo next = head.getSiguiente();
                 sumaPasosOrdenamientoAlfabetico+=2;
-                for (int j = 0; j < size() - 1; j++) {
+                for (int j = 0; j < sizeLista - 1; j++) {
                     if (nodoActual.informacion.getApostador().compareTo(next.informacion.getApostador()) > 0) {
                         swapNodos(nodoActual, next, true);
                         sumaPasosOrdenamientoAlfabetico+=4;
